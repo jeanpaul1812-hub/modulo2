@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mani Bank | Salidas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root { --primary: #004a99; --secondary: #f4f7f6; --accent: #00a86b; --danger: #ff4d4d; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--secondary); margin: 0; padding: 20px; display: flex; justify-content: center; }
@@ -12,11 +13,6 @@
         .sub { color: #666; font-size: 0.9em; margin-top: 5px; }
         .saldo-card { background: var(--accent); color: white; padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0, 168, 107, 0.3); }
         .nav-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        button { padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-main { background: var(--primary); color: white; width: 100%; }
-        .btn-nav { background: #e0e0e0; }
-        .btn-logout { background: #ff4d4d; color: white; margin-top: 20px; width: 100%; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -33,21 +29,23 @@
     </div>
 
     <div class="nav-menu">
-        <button class="btn-nav" onclick="location.href='ingresos.html'">Ingresos</button>
-        <button class="btn-nav active" onclick="location.href='salidas.html'">Salidas</button>
-        <button class="btn-nav" onclick="location.href='clientes.html'">Clientes</button>
-        <button class="btn-nav" onclick="location.href='movimientos.html'">Movimientos</button>
+        <button class="btn btn-secondary" onclick="location.href='ingresos.html'">Ingresos</button>
+        <button class="btn btn-primary active" onclick="location.href='salidas.html'">Salidas</button>
+        <button class="btn btn-secondary" onclick="location.href='clientes.html'">Clientes</button>
+        <button class="btn btn-secondary" onclick="location.href='movimientos.html'">Movimientos</button>
     </div>
 
-    <div class="section">
-        <select id="recipient-select"></select>
-        <input type="number" id="amount" placeholder="Monto a enviar">
-        <button class="btn-main" onclick="transfer()">Realizar Envío</button>
+    <div class="section mb-3">
+        <select id="recipient-select" class="form-select mb-2"></select>
+        <input type="number" id="amount" class="form-control mb-2" placeholder="Monto a enviar">
+        <button class="btn btn-primary w-100" onclick="transfer()">Realizar Envío</button>
     </div>
 
-    <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+    <button class="btn btn-danger w-100" onclick="logout()">Cerrar Sesión</button>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     if (!localStorage.getItem('auth')) window.location.href = 'index.html';
 
@@ -55,25 +53,25 @@
     let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
     let history = JSON.parse(localStorage.getItem('history')) || [];
     
-    document.getElementById('saldo').innerText = "$" + balance.toFixed(2);
+    $('#saldo').text("$" + balance.toFixed(2));
 
-    const select = document.getElementById('recipient-select');
-    select.innerHTML = '<option value="">Seleccione cliente...</option>';
+    const select = $('#recipient-select');
+    select.html('<option value="">Seleccione cliente...</option>');
     contacts.forEach((c, i) => {
-        select.innerHTML += `<option value="${i}">${c.nombre}</option>`;
+        select.append(`<option value="${i}">${c.nombre}</option>`);
     });
 
     function transfer() {
-        const amount = parseFloat(document.getElementById('amount').value);
-        const index = select.value;
+        const amount = parseFloat($('#amount').val());
+        const index = select.val();
         if (amount > 0 && amount <= balance && index !== "") {
             balance -= amount;
             history.unshift(`SALIDA: -$${amount} a ${contacts[index].nombre}`);
             
             localStorage.setItem('balance', balance);
             localStorage.setItem('history', JSON.stringify(history));
-            document.getElementById('amount').value = '';
-            document.getElementById('saldo').innerText = "$" + balance.toFixed(2);
+            $('#amount').val('');
+            $('#saldo').text("$" + balance.toFixed(2));
             alert('Transferencia realizada exitosamente');
         } else { 
             alert("Saldo insuficiente o datos inválidos"); 
