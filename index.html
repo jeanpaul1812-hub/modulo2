@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mani Bank | Login</title>
+    <style>
+        :root { --primary: #004a99; --secondary: #f4f7f6; --accent: #00a86b; --danger: #ff4d4d; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--secondary); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; height: 80vh; }
+        .container { width: 100%; max-width: 450px; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        header { text-align: center; margin-bottom: 20px; }
+        h1 { color: var(--primary); margin: 0; }
+        .sub { color: #666; font-size: 0.9em; margin-top: 5px; }
+        button { padding: 12px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-main { background: var(--primary); color: white; width: 100%; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Mani Bank</h1>
+        <p class="sub">Tu billetera digital segura</p>
+    </header>
+
+    <div>
+        <input type="text" id="user" placeholder="Usuario (jeanpaul)">
+        <input type="password" id="pass" placeholder="Contraseña (6789)">
+        <button class="btn-main" onclick="login()">Acceder</button>
+    </div>
+</div>
+
+<script>
+    const USER_VALID = "jeanpaul";
+    const PASS_VALID = "6789";
+
+    // Limpiar sesión anterior
+    localStorage.removeItem('auth');
+
+    function login() {
+        if (document.getElementById('user').value === USER_VALID && document.getElementById('pass').value === PASS_VALID) {
+            localStorage.setItem('auth', 'true');
+            window.location.href = 'ingresos.html';
+        } else { 
+            alert("Usuario o contraseña incorrectos"); 
+        }
+    }
+</script>
+</body>
+</html>
