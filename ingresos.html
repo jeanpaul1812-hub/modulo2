@@ -60,7 +60,7 @@
             localStorage.setItem('balance', balance);
             localStorage.setItem('history', JSON.stringify(history));
             $('#inputDeposit').val('');
-            $('#saldo').text("$" + balance.toFixed(2));
+            $('#saldo').text("$" + balance.toFixed());
             alert('Depósito realizado con éxito');
         }
     }
