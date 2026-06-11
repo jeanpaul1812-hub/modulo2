@@ -50,7 +50,7 @@
 
     let balance = parseFloat(localStorage.getItem('balance')) || 0;
     let history = JSON.parse(localStorage.getItem('history')) || [];
-    $('#saldo').text("$" + balance.toFixed(2));
+    $('#saldo').text("$" + balance.toFixed());
 
     function realizarDeposito() {
         const monto = parseFloat($('#inputDeposit').val());

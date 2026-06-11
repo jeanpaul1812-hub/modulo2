@@ -53,7 +53,7 @@
     let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
     let history = JSON.parse(localStorage.getItem('history')) || [];
     
-    $('#saldo').text("$" + balance.toFixed(2));
+    $('#saldo').text("$" + balance.toFixed());
 
     const select = $('#recipient-select');
     select.html('<option value="">Seleccione cliente...</option>');
@@ -71,7 +71,7 @@
             localStorage.setItem('balance', balance);
             localStorage.setItem('history', JSON.stringify(history));
             $('#amount').val('');
-            $('#saldo').text("$" + balance.toFixed(2));
+            $('#saldo').text("$" + balance.toFixed());
             alert('Transferencia realizada exitosamente');
         } else { 
             alert("Saldo insuficiente o datos inválidos"); 

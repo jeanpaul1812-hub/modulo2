@@ -27,7 +27,7 @@
 
     <div class="saldo-card">
         <small>Saldo Disponible</small>
-        <h1 id="saldo">$0.</h1>
+        <h1 id="saldo">$0</h1>
     </div>
 
     <div class="nav-menu">
@@ -57,7 +57,7 @@
     let balance = parseFloat(localStorage.getItem('balance')) || 0;
     let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
     
-    $('#saldo').text("$" + balance.toFixed(2));
+    $('#saldo').text("$" + balance.toFixed());
     renderContacts();
 
     function addContact() {
