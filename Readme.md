@@ -1,4 +1,5 @@
 🏦 Mani Bank - Billetera Digital
+
 Aplicación web de simulación de una billetera digital desarrollada como proyecto multipágina utilizando HTML5, CSS3, Bootstrap 5 y jQuery. Permite gestionar saldo, registrar transacciones (ingresos y salidas), mantener una libreta de contactos/clientes y visualizar el historial de movimientos, persistiendo los datos de manera local en el navegador.
 
 🚀 Características
